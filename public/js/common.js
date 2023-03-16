@@ -2,7 +2,7 @@ const sendData = (path, data) => {
     console.log(data);
     fetch(path, {
     method: 'post',
-    headers: new Headers({'Content-Type' : 'application/json'}),
+    headers: new Headers({        'Content-Type': 'application/json',}),
     body: JSON.stringify(data)
     })
     .then(res => res.json())
@@ -12,9 +12,7 @@ const sendData = (path, data) => {
 const processData = (data) => {
    
     loader.style.display=null;
-    if(data.alert){
-        showFormError(data.alert);
-    } 
+    
     }
      
 

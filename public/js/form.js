@@ -10,11 +10,11 @@ let tac = document.querySelector('#tc');
 // form validation
  if(fullname.value.length < 3){
     showFormError(' Name must be 3 letters long');
-    } else if(!email.value.length){
+    } else if(!email.value ||!email.value.length){
     showFormError('enter your email');
     }else if(password.value.length < 8){
     showFormError('password must be 8 letters long');
-    }else if(Number(number) || number.value.length < 10){
+    }else if(number.length < 10){
     showFormError('invalid number, please enter valid one');
     }
     else if(!tac.checked){

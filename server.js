@@ -1,32 +1,32 @@
 import express from "express";
 import bcrypt from "bcrypt";
 // Import the functions you need from the SDKs you need
+// Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
-import { getAnalytics } from "firebase/analytics";
-import {getFirestore,doc,collection,setDoc,getDoc,updateDoc} from "firebase/firestore";
-// TODO: Add SDKs for Firebase products that you want to use
-// https://firebase.google.com/docs/web/setup#available-libraries
+import { getFirestore, doc, collection,setDoc, getDoc,updateDoc} from "firebase/firestore"
 
 // Your web app's Firebase configuration
-// For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
-  apiKey: "AIzaSyCgEavvtNS7UAdmSHlAQHY4OzngXZBGamc",
-  authDomain: "cidrie-project1.firebaseapp.com",
-  projectId: "cidrie-project1",
-  storageBucket: "cidrie-project1.appspot.com",
-  messagingSenderId: "66283641389",
-  appId: "1:66283641389:web:fe82e6749f3e454c5576a4",
-  measurementId: "G-1ZFSHFZJHE"
+  apiKey: "AIzaSyC97mjmBUouRuL2Yczvvm1Q3A6h5medCNI",
+  authDomain: "artisans-72e2d.firebaseapp.com",
+  projectId: "artisans-72e2d",
+  storageBucket: "artisans-72e2d.appspot.com",
+  messagingSenderId: "731608420768",
+  appId: "1:731608420768:web:c2d5fec19d0928222814c5"
 };
 
-// Initialize Firebase
+
+
+// //init server
+ const app=express();
+
+// // Initialize Firebase
 
 const firebase = initializeApp(firebaseConfig);
 const db=getFirestore();
-const analytics = getAnalytics(app);
 
-//init server
-  app=express();
+
+
 //middlewares
 app.use(express.static("public"));
 app.use(express.json())//enable form sharing
@@ -40,20 +40,23 @@ app.get('/',(req,res)=>{
 app.get('/signup',(req,res)=>{
     res.sendFile("signup.html",{root: "public" })
 
-})
+ })
 app.post('/signup',(req,res)=>{
    const{ name, email,password,number,tac}=req.body;
    //form validations 
    if(name.length < 3){
     res.json({'alert':'name must be  3 letters long'});
+    
     } else if(!email.length){
         res.json({'alert': 'enter your email'});
     }else if(password.length < 8){
         res.json({'alert': 'password must be atleast 8 letter long'});
-    }else if(!Number(number) || number.value.length < 10){
-        res.json({'alert': 'invalid number, Enter a valid one'});
-
     }
+    else if(number.length < 10){
+        res.json({'alert': 'invalid number, Enter a valid one'});
+        console.log(number.length);
+     }
+    
     else if(!tac){
      res.json({'alert':'please accept the terms and conditions'});
         }
@@ -83,13 +86,13 @@ app.post('/signup',(req,res)=>{
             })
         }
 })
-//404 route
+// //404 route
 app.get('/404',(req,res)=>{
     res.sendFile("404.html",{root:"public"})
 })
 app.use((req,res)=>{
     res.redirect('/404')
 })
-app.listen(4000,()=>{
-    console.log('listening on port 4000');
+app.listen(3000,()=>{
+    console.log('listening on port 3000');
 })
